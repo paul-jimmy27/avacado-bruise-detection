@@ -1,6 +1,7 @@
 streamlit
-opencv-python-headless
 numpy
-pandas
+opencv-python-headless
+spectral
+joblib
 scikit-learn
 xgboost
