@@ -120,7 +120,6 @@ if st.session_state.done:
     st.header("Processed Result")
 
     with st.container(border=True):
-
         col1, col2 = st.columns([10, 1])
         with col2:
             if st.button("✖", key="close_btn"):
@@ -138,9 +137,18 @@ if st.session_state.done:
 
     st.header("Prediction Result")
     st.write(f"Predicted Time Class: T{st.session_state.majority_time}")
-
-    with st.container(border=True):
-        st.info(time_descriptions[st.session_state.majority_time])
+    st.markdown(f"""
+        <div style="
+            background-color: #1e3a2f;
+            color: rgb(92, 228, 136);
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            line-height: 1.6;
+        ">
+        {time_descriptions[st.session_state.majority_time]}
+        </div>
+    """, unsafe_allow_html=True)
 
 # -------------------------------
 # UPLOAD + PROCESSING VIEW
@@ -162,7 +170,7 @@ else:
     """)
 
     zip_file = st.file_uploader("Upload ZIP file", type=["zip"])
-
+   
     if zip_file:
 
         tmpdir = tempfile.mkdtemp()
@@ -373,3 +381,15 @@ else:
 
         if st.session_state.done:
             st.rerun()
+    with st.container(border=True):
+        col1, col2 = st.columns([3, 2])
+        with col1:
+            st.markdown("<h2 style='color: rgb(92, 228, 136);'>What is hyperspectral?</h2>",unsafe_allow_html=True)
+            st.write("Hyperspectral imaging captures many spectral bands per pixel. This helps reveal subtle changes that may not be visible in regular RGB images—useful for detecting bruises beneath the peel.")
+        with col2:
+            st.markdown("<h2 style='color: rgb(92, 228, 136);'>How ML helps</h2>",unsafe_allow_html=True)
+            st.write("Machine learning can learn spectral/spatial patterns. With preprocessing (normalization, band selection, denoising), models can classify pixels or segment bruised regions.")
+    with st.container(border=True):
+        st.header("Project Credits")
+        st.write("Project done by **Adhil PT, Muhammed Shanis, Paul Jimmy, Vishnu TS**")
+        st.write("Under the guidance of **Dr. Shihabudheen K.V**")
